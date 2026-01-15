@@ -5,6 +5,7 @@ def find_document(filename):
     file_path = Path(__file__).parent / filename
     doc = Document(file_path)
     return doc
+
 #1a
 def count_paragraphs(filename):
     doc = find_document('essay_FINAL_general.docx')
@@ -32,8 +33,14 @@ def extract_file(filename):
     while i < len(doc.paragraphs) and doc.paragraphs[i].text.strip() == "":
         i += 1
 
+    # 1e - centered and bold title
     while i < len(doc.paragraphs) and doc.paragraphs[i].text.strip() != "":
-        title = doc.paragraphs[i].text
+        paragraph = doc.paragraphs[i]
+        title = paragraph.text
+        isBold = paragraph.style.font.bold
+        isCentered = paragraph.alignment == 1  # 1 corresponds to centered alignment
+        print(f"Title: '{title}', Bold: {isBold}, Centered: {isCentered}")
+
         i += 1
 
     for p in doc.paragraphs[i:]:
@@ -44,3 +51,5 @@ def extract_file(filename):
     return "\n".join(header_lines), title, "\n\n".join(body_paragraphs)
 
 print(f'Header: {extract_file('essay_FINAL_general.docx')[0]}, Title: {extract_file('essay_FINAL_general.docx')[1]}, Body: {extract_file('essay_FINAL_general.docx')[2][:100]}...')
+
+# 1e
