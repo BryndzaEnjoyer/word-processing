@@ -21,4 +21,4 @@ def compare_results(filename_data, filename_output):
     return conflicts
 
 if __name__ == "__main__":
-    compare_results("Výpočty a filtrovanie.xlsx", "Výpočty a filtrovanie_RIEŠENIE.xlsx")
+    compare_results("Výpočty a filtrovanie.xlsx", "Výpočty a filtrovanie_RIEŠENIE.xlsx")
