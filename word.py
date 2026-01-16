@@ -1,26 +1,24 @@
 from pydoc import doc
 from docx import Document
-from pathlib import Path
-def find_document(filename):
-    file_path = Path(__file__).parent / filename
+from config import get_data_file_path
+
+def find_document(filename: str):
+    file_path = get_data_file_path(filename)
     doc = Document(file_path)
     return doc
 
+doc = find_document('essay_FINAL_general.docx')
+
 #1a
-def count_paragraphs(filename):
-    doc = find_document('data/raw/essay_FINAL_general.docx')
+def count_paragraphs(doc):
     return len(doc.paragraphs)
 
 #1b
-doc = find_document('data/raw/essay_FINAL_general.docx')
-print("Number of paragraphs in the document:", count_paragraphs('essay_FINAL_general.docx'))
+print("Number of paragraphs in the document:", count_paragraphs(doc))
 font = doc.styles['Normal'].font
 
 #1c
-def extract_file(filename):
-    # file_path = Path(__file__).parent / filename
-    doc = find_document('data/raw/essay_FINAL_general.docx')
-
+def extract_file(doc):
     header_lines = []
     title = ""
     body_paragraphs = []
@@ -50,6 +48,5 @@ def extract_file(filename):
 
     return "\n".join(header_lines), title, "\n\n".join(body_paragraphs)
 
-print(f'Header: {extract_file('essay_FINAL_general.docx')[0]}, Title: {extract_file('essay_FINAL_general.docx')[1]}, Body: {extract_file('essay_FINAL_general.docx')[2][:100]}...')
-
-# 1e
+extracted = extract_file(doc)
+print(f'Header: {extracted[0]}, Title: {extracted[1]}, Body: {extracted[2][:100]}...')
