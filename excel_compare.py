@@ -1,12 +1,8 @@
 from openpyxl import Workbook as wb
 from openpyxl import load_workbook
 from pathlib import Path
+from config import get_data_file_path, get_output_file_path
 
-def get_data_file_path(filename):
-	return Path(__file__).parent / "data/raw" / filename
-
-def get_output_file_path(filename):
-	return Path(__file__).parent / "data/processed" / filename
 
 def compare_results(filename_data, filename_output):
     doc_data = load_workbook(get_data_file_path(filename_data), data_only=False)
@@ -21,3 +17,8 @@ def compare_results(filename_data, filename_output):
             for cell in row:
                 if cell.value != sheet_output[cell.coordinate].value:
                     conflicts[cell.coordinate] = (cell.value, sheet_output[cell.coordinate].value)
+
+    return conflicts
+
+if __name__ == "__main__":
+    compare_results("Výpočty a filtrovanie.xlsx", "Výpočty a filtrovanie_RIEŠENIE.xlsx")
