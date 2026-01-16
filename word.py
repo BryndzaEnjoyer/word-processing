@@ -8,18 +8,18 @@ def find_document(filename):
 
 #1a
 def count_paragraphs(filename):
-    doc = find_document('essay_FINAL_general.docx')
+    doc = find_document('data/raw/essay_FINAL_general.docx')
     return len(doc.paragraphs)
 
 #1b
-doc = find_document('essay_FINAL_general.docx')
+doc = find_document('data/raw/essay_FINAL_general.docx')
 print("Number of paragraphs in the document:", count_paragraphs('essay_FINAL_general.docx'))
 font = doc.styles['Normal'].font
 
 #1c
 def extract_file(filename):
     # file_path = Path(__file__).parent / filename
-    doc = find_document('essay_FINAL_general.docx')
+    doc = find_document('data/raw/essay_FINAL_general.docx')
 
     header_lines = []
     title = ""
