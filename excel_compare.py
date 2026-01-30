@@ -6,6 +6,7 @@ from config import get_data_file_path, get_output_file_path
 
 
 
+
 def compare_results(filename_data, filename_output):
     doc_data = load_workbook(get_data_file_path(filename_data), data_only=False)
     doc_output = load_workbook(get_output_file_path(filename_output), data_only=False)

@@ -2,7 +2,7 @@ import openpyxl as xl
 from config import get_data_file_path
 import data_frame_functions as dff
 import excel as ex
-
+import pandas as pd
 
 path=get_data_file_path('Výpočty a filtrovanie.xlsx')
 
@@ -16,8 +16,7 @@ def select_sheet(x):
     sheet_obj = wb.active
     row = sheet_obj.max_row
     column = sheet_obj.max_column
-
-
+  
     all_values = []
     for i in range(1, row + 1):
         row_values = []
@@ -29,4 +28,10 @@ def select_sheet(x):
     return all_values
 
 y=int(input("select a sheet number:"))
-print(select_sheet(y))
+
+table = pd.DataFrame(select_sheet(y))
+print(table)
+A=dff.read_collumn("A")
+B=dff.read_collumn("B")
+collumn2=dff.summation(A,B)
+print(collumn2)
