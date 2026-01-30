@@ -1,5 +1,6 @@
 import openpyxl as xl
 from config import get_data_file_path
+import pandas as pd
 path=get_data_file_path('Výpočty a filtrovanie.xlsx')
 
 wb = xl.load_workbook(path)
@@ -25,4 +26,22 @@ def select_sheet(x):
     return all_values
 
 y=int(input("select a sheet number:"))
-print(select_sheet(y))
+
+data=select_sheet(y)
+
+
+
+df = pd.DataFrame(data)
+df.drop(9, axis=1, inplace=True)
+df.drop(10, axis=1, inplace=True)
+df.drop(8, axis=1, inplace=True)
+df.drop(7, axis=1, inplace=True)
+for i in range(7,16):
+    df.drop(i, axis=0, inplace=True)
+df.drop(0, axis=0, inplace=True)
+
+print(df)
+
+
+
+
